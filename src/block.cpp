@@ -128,3 +128,7 @@ const Block::cell_t& Block::get_cell(const int &position) const {
 const Block::BlockType& Block::get_block_type() const {
     return m_type;
 }
+
+const Grid::ColorId& Block::get_color_id() const {
+    return s_blocks[m_type].id;
+}

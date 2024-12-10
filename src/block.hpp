@@ -43,6 +43,7 @@ public:
     const int& get_col_offset() const;
     const cell_t& get_cell(const int &position) const;
     const BlockType& get_block_type() const;
+    const Grid::ColorId& get_color_id() const;
 };
 
 #endif//TETRIS_BLOCK_HPP
