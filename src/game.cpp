@@ -93,7 +93,7 @@ void Game::on_render() {
     m_grid.draw();
     m_block.draw();
 
-    // TODO: draw scoring / time / next block
+    draw_hud();
 
     if (m_game_over) {
         s_text_buffer.width = MeasureText("GAME OVER", 30);
@@ -202,4 +202,22 @@ void Game::reset_game() {
     m_grid.reset_cells();
     m_block.randomize();
     m_next_block.randomize();
+}
+
+void Game::draw_hud() {
+    // Draw text to the right of the Tetris Grid
+    s_text_buffer.bounds.x = (Grid::s_cell_size * Grid::s_num_cols) + Grid::s_padding + 10.0f;
+    s_text_buffer.bounds.y = Grid::s_padding;
+    DrawText("SCORE:", s_text_buffer.bounds.x, s_text_buffer.bounds.y, 20, RED);
+
+    s_text_buffer.bounds.y += 25.0f;
+    DrawText(TextFormat("%d", m_score), s_text_buffer.bounds.x, s_text_buffer.bounds.y, 16, WHITE);
+
+    s_text_buffer.bounds.y += 30.0f;
+    DrawText("TIME:", s_text_buffer.bounds.x, s_text_buffer.bounds.y, 20, RED);
+
+    s_text_buffer.bounds.y += 25.0f;
+    DrawText(TextFormat("%.2f", GetTime()), s_text_buffer.bounds.x, s_text_buffer.bounds.y, 16, WHITE);
+
+    // TODO: draw HUD for next block
 }

@@ -30,6 +30,7 @@ private:
     bool is_block_touching_another_block_or_off_grid();
     void update_score(const int &rows_cleared, const int &down_points);
     void reset_game();
+    void draw_hud();
 };
 
 #endif//TETRIS_GAME_HPP
