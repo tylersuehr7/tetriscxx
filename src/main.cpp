@@ -12,6 +12,7 @@ int main(void) {
     SetTargetFPS(60);
 
     while (!WindowShouldClose()) {
+        game.on_process_input();
         game.on_update();
         BeginDrawing();
             ClearBackground(BLACK);
