@@ -35,5 +35,5 @@ bool Grid::is_cell_empty(const unsigned int &row, const unsigned int &col) {
 }
 
 bool Grid::is_a_cell(const int &row_offset, const int &col_offset) {
-    return row_offset > 0 && row_offset < s_num_rows && col_offset > 0 && col_offset < s_num_cols;
+    return row_offset >= 0 && row_offset < s_num_rows && col_offset >= 0 && col_offset < s_num_cols;
 }
