@@ -39,8 +39,8 @@ public:
     void draw();
     void reset_cells();
     void set_cell_color(const unsigned int &row, const unsigned int &col, const ColorId &id);
-    bool is_cell_empty(const unsigned int &row, const unsigned int &col);
-    bool is_a_cell(const int &row_offset, const int &col_offset);
+    const bool is_cell_empty(const unsigned int &row, const unsigned int &col);
+    const bool is_off_grid(const int &adjusted_row, const int &adjusted_col);
     int clear_full_rows();
 private:
     bool is_row_full(const unsigned int &row);

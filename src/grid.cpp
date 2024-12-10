@@ -30,12 +30,12 @@ void Grid::set_cell_color(const unsigned int &row, const unsigned int &col, cons
     m_cells[row][col] = id;
 }
 
-bool Grid::is_cell_empty(const unsigned int &row, const unsigned int &col) {
+const bool Grid::is_cell_empty(const unsigned int &row, const unsigned int &col) {
     return m_cells[row][col] == COLOR_ID_EMPTY;
 }
 
-bool Grid::is_a_cell(const int &row_offset, const int &col_offset) {
-    return row_offset >= 0 && row_offset < s_num_rows && col_offset >= 0 && col_offset < s_num_cols;
+const bool Grid::is_off_grid(const int &adjusted_row, const int &adjusted_col) {
+    return adjusted_row < 0 || adjusted_col < 0 || adjusted_row >= s_num_rows || adjusted_col >= s_num_cols;
 }
 
 int Grid::clear_full_rows() {
