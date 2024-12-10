@@ -12,5 +12,5 @@ void Game::on_update() {
 }
 
 void Game::on_render() {
-
+    ClearBackground(BLACK);
 }
