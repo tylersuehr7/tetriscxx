@@ -2,6 +2,7 @@
 
 Game::Game(const Vector2 &size): 
     m_size(size),
+    m_started(false),
     m_game_speed(0.4f),
     m_last_update_in_secs(0.0),
     m_score(0), 
@@ -10,6 +11,13 @@ Game::Game(const Vector2 &size):
 }
 
 void Game::on_process_input() {
+    if (!m_started) {
+        if (KEY_ENTER == GetKeyPressed()) {
+            m_started = true;
+        }
+        return;
+    }
+
     switch (GetKeyPressed()) {
     case KEY_LEFT:
         move_block_left();
@@ -27,6 +35,10 @@ void Game::on_process_input() {
 }
 
 void Game::on_update() {
+    if (!m_started) {
+        return;
+    }
+    
     const double current_time_in_secs = GetTime();
 
     if (current_time_in_secs - m_last_update_in_secs < m_game_speed) {
@@ -38,8 +50,38 @@ void Game::on_update() {
     move_block_down();
 }
 
+static struct {
+    float width;
+    Vector2 bounds;
+} s_text_buffer;
+
 void Game::on_render() {
     ClearBackground(BLACK);
+
+    if (!m_started) {
+        s_text_buffer.width = MeasureText("Welcome!", 20);
+        s_text_buffer.bounds.x = (m_size.x / 2.0f) - (s_text_buffer.width / 2.0f);
+        s_text_buffer.bounds.y = (m_size.y / 2.0f) - 10.0f - 20.0f - 30.0f;
+        DrawText("Welcome!", s_text_buffer.bounds.x, s_text_buffer.bounds.y, 20, WHITE);
+
+        s_text_buffer.width = MeasureText("Tetris Clone", 30);
+        s_text_buffer.bounds.x = (m_size.x / 2.0f) - (s_text_buffer.width / 2.0f);
+        s_text_buffer.bounds.y += 30.0f;
+        DrawText("Tetris Clone", s_text_buffer.bounds.x, s_text_buffer.bounds.y, 30, WHITE);
+
+        s_text_buffer.width = MeasureText("Press 'enter' to play", 12);
+        s_text_buffer.bounds.x = (m_size.x / 2.0f) - (s_text_buffer.width / 2.0f);
+        s_text_buffer.bounds.y += 60.0f;
+        DrawText("Press 'enter' to play", s_text_buffer.bounds.x, s_text_buffer.bounds.y, 12, WHITE);
+
+        s_text_buffer.width = MeasureText("Powered by Suehr Gaming LLC", 10);
+        s_text_buffer.bounds.x = (m_size.x / 2.0f) - (s_text_buffer.width / 2.0f);
+        s_text_buffer.bounds.y = m_size.y - 30.0f;
+        DrawText("Powered by Suehr Gaming LLC", s_text_buffer.bounds.x, s_text_buffer.bounds.y, 10, WHITE);
+
+        return;
+    }
+
     m_grid.draw();
     m_block.draw();
 }
