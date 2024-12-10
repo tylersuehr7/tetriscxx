@@ -66,8 +66,6 @@ static struct {
 } s_text_buffer;
 
 void Game::on_render() {
-    ClearBackground(BLACK);
-
     if (!m_started) {
         s_text_buffer.width = MeasureText("Welcome!", 20);
         s_text_buffer.bounds.x = (m_size.x / 2.0f) - (s_text_buffer.width / 2.0f);
