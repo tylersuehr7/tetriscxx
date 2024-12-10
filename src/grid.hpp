@@ -21,7 +21,7 @@ public:
     static constexpr const int s_num_cols     = 10;
     static constexpr const int s_padding      = 20;
     static constexpr const int s_cell_size    = 30;
-    static constexpr const int s_cell_margine = 1;
+    static constexpr const int s_cell_margin  = 1;
     static constexpr const Color s_cell_colors[COLOR_ID_MAX] = {
         LIGHTGRAY,  // COLOR_ID_EMPTY
         BLUE,       // COLOR_ID_BLUE
