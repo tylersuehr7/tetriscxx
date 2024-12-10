@@ -41,6 +41,11 @@ public:
     void set_cell_color(const unsigned int &row, const unsigned int &col, const ColorId &id);
     bool is_cell_empty(const unsigned int &row, const unsigned int &col);
     bool is_a_cell(const int &row_offset, const int &col_offset);
+    int clear_full_rows();
+private:
+    bool is_row_full(const unsigned int &row);
+    void clear_row(const unsigned int &row);
+    void move_row_down(const unsigned int &row, const unsigned int &num_rows_cleared);
 };
 
 #endif//TETRIS_GRID_HPP
