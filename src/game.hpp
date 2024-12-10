@@ -8,6 +8,7 @@
 class Game {
 private:
     const Vector2 m_size;
+    int m_score;
     Grid m_grid;
     Block m_block;
 public:
@@ -21,6 +22,7 @@ private:
     void move_block_right();
     void move_block_down();
     bool is_block_touching_another_block_or_off_grid();
+    void update_score(const int &rows_cleared, const int &down_points);
 };
 
 #endif//TETRIS_GAME_HPP

@@ -1,6 +1,10 @@
 #include "game.hpp"
 
-Game::Game(const Vector2 &size): m_size(size), m_grid(Grid()), m_block(Block()) {
+Game::Game(const Vector2 &size): 
+    m_size(size),
+    m_score(0), 
+    m_grid(Grid()), 
+    m_block(Block()) {
 }
 
 void Game::on_process_input() {
@@ -52,9 +56,12 @@ void Game::move_block_right() {
 
 void Game::move_block_down() {
     m_block.move_by(1, 0);
+    
     if (is_block_touching_another_block_or_off_grid()) {
         m_block.move_by(-1, 0);
     }
+
+    update_score(0, 1);
 }
 
 bool Game::is_block_touching_another_block_or_off_grid() {
@@ -70,4 +77,23 @@ bool Game::is_block_touching_another_block_or_off_grid() {
         }
     }
     return false;
+}
+
+void Game::update_score(const int &rows_cleared, const int &down_points) {
+    switch (rows_cleared) {
+    case 1:
+        m_score += 100;
+        break;
+    case 2:
+        m_score += 300;
+        break;
+    case 3:
+        m_score += 500;
+        break;
+    case 4:
+        m_score += 1000;
+        // TODO: play tetris sound
+        break;
+    }
+    m_score += down_points;
 }
