@@ -2,6 +2,8 @@
 
 Game::Game(const Vector2 &size): 
     m_size(size),
+    m_game_speed(0.4f),
+    m_last_update_in_secs(0.0),
     m_score(0), 
     m_grid(Grid()), 
     m_block(Block()) {
@@ -25,6 +27,15 @@ void Game::on_process_input() {
 }
 
 void Game::on_update() {
+    const double current_time_in_secs = GetTime();
+
+    if (current_time_in_secs - m_last_update_in_secs < m_game_speed) {
+        return;
+    }
+
+    m_last_update_in_secs = current_time_in_secs;
+
+    move_block_down();
 }
 
 void Game::on_render() {

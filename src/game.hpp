@@ -8,6 +8,8 @@
 class Game {
 private:
     const Vector2 m_size;
+    float m_game_speed;
+    double m_last_update_in_secs;
     int m_score;
     Grid m_grid;
     Block m_block;
