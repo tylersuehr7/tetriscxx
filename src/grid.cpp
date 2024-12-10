@@ -29,3 +29,11 @@ void Grid::reset_cells() {
 void Grid::set_cell_color(const unsigned int &row, const unsigned int &col, const ColorId &id) {
     m_cells[row][col] = id;
 }
+
+bool Grid::is_cell_empty(const unsigned int &row, const unsigned int &col) {
+    return m_cells[row][col] == COLOR_ID_EMPTY;
+}
+
+bool Grid::is_a_cell(const int &row_offset, const int &col_offset) {
+    return row_offset > 0 && row_offset < s_num_rows && col_offset > 0 && col_offset < s_num_cols;
+}
