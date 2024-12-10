@@ -1,5 +1,5 @@
 SOURCE_DIR=.
-BUILD_DIR=./build
+BUILD_DIR=./.build
 EXECUTABLE=tetris
 
 build:
