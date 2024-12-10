@@ -40,6 +40,7 @@ bool Grid::is_a_cell(const int &row_offset, const int &col_offset) {
 
 int Grid::clear_full_rows() {
     unsigned int row, num_rows_cleared = 0;
+    
     for (row = s_num_rows - 1; row > 0; row--) {
         if (is_row_full(row)) {
             clear_row(row);
@@ -48,6 +49,8 @@ int Grid::clear_full_rows() {
             move_row_down(row, num_rows_cleared);
         }
     }
+
+    return num_rows_cleared;
 }
 
 bool Grid::is_row_full(const unsigned int &row) {
