@@ -101,6 +101,11 @@ void Game::on_render() {
         s_text_buffer.bounds.x = (m_size.x / 2.0f) - (s_text_buffer.width / 2.0f);
         s_text_buffer.bounds.y = 20.0f;
         DrawText("GAME OVER", s_text_buffer.bounds.x, s_text_buffer.bounds.y, 30, RED);
+
+        s_text_buffer.width = MeasureText("Press 'enter' to play again", 12);
+        s_text_buffer.bounds.x = (m_size.x / 2.0f) - (s_text_buffer.width / 2.0f);
+        s_text_buffer.bounds.y += 40.0f;
+        DrawText("Press 'enter' to play again", s_text_buffer.bounds.x, s_text_buffer.bounds.y, 12, RED);
     }
 }
 
