@@ -1,38 +1,34 @@
 #include "sounds.hpp"
-#include <raylib.h>
 
-static Sound s_clear_sound;
-static Sound s_rotate_sound;
-static Music s_music;
-
-void Sounds::load_sounds() {
-    s_clear_sound = LoadSound("assets/clear.mp3");
-    s_rotate_sound = LoadSound("assets/rotate.mp3");
-    s_music = LoadMusicStream("assets/music.mp3");
+Sounds::Sounds():
+    m_clear_sound(LoadSound("assets/clear.mp3")),
+    m_rotate_sound(LoadSound("assets/rotate.mp3")),
+    m_music(LoadMusicStream("assets/music.mp3")) {
 }
 
-void Sounds::unload_sounds() {
-    UnloadSound(s_clear_sound);
-    UnloadSound(s_rotate_sound);
-    UnloadMusicStream(s_music);
+Sounds::~Sounds() {
+    stop_music();
+    UnloadSound(m_clear_sound);
+    UnloadSound(m_rotate_sound);
+    UnloadMusicStream(m_music);
 }
 
-void Sounds::play_clear() {
-    PlaySound(s_clear_sound);
+void Sounds::play_clear() const {
+    PlaySound(m_clear_sound);
 }
 
-void Sounds::play_rotate() {
-    PlaySound(s_rotate_sound);
+void Sounds::play_rotate() const {
+    PlaySound(m_rotate_sound);
 }
 
-void start_music() {
-    PlayMusicStream(s_music);
+void Sounds::start_music() const {
+    PlayMusicStream(m_music);
 }
 
-void continue_music() {
-    UpdateMusicStream(s_music);
+void Sounds::continue_music() const {
+    UpdateMusicStream(m_music);
 }
 
-void stop_music() {
-    StopMusicStream(s_music);
+void Sounds::stop_music() const {
+    StopMusicStream(m_music);
 }
