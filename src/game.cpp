@@ -1,7 +1,8 @@
 #include "game.hpp"
 
-Game::Game(const Vector2 &size): 
+Game::Game(const Vector2 &size, const Sounds &sounds): 
     m_size(size),
+    m_sounds(sounds),
     m_started(false),
     m_game_over(false),
     m_game_speed(0.4f),
@@ -125,7 +126,7 @@ void Game::finalize_block() {
 
     int rows_cleared = m_grid.clear_full_rows();
     if (rows_cleared > 0) {
-        // TODO: play clear sound
+        m_sounds.play_clear();
         update_score(rows_cleared, 0);
     }
 }
@@ -135,7 +136,7 @@ void Game::rotate_block() {
     if (is_block_touching_another_block_or_off_grid()) {
         m_block.undo_rotate();
     } else {
-        // TODO: play rotation sound
+        m_sounds.play_rotate();
     }
 }
 

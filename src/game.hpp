@@ -4,10 +4,12 @@
 #include <raylib.h>
 #include "grid.hpp"
 #include "block.hpp"
+#include "sounds.hpp"
 
 class Game {
 private:
     const Vector2 m_size;
+    const Sounds& m_sounds;
     bool m_started;
     bool m_game_over;
     float m_game_speed;
@@ -17,7 +19,7 @@ private:
     Block m_block;
     Block m_next_block;
 public:
-    Game(const Vector2 &size);
+    Game(const Vector2 &size, const Sounds &sounds);
     void on_process_input();
     void on_update();
     void on_render();
