@@ -219,5 +219,30 @@ void Game::draw_hud() {
     s_text_buffer.bounds.y += 25.0f;
     DrawText(TextFormat("%.2f", GetTime()), s_text_buffer.bounds.x, s_text_buffer.bounds.y, 16, WHITE);
 
-    // TODO: draw HUD for next block
+    s_text_buffer.bounds.y += 30.0f;
+    const float preview_outline_size = m_size.x - s_text_buffer.bounds.x - 10.0f;
+    DrawRectangleLines(
+        s_text_buffer.bounds.x,
+        s_text_buffer.bounds.y,
+        preview_outline_size,
+        preview_outline_size,
+        LIGHTGRAY
+    );
+
+    m_next_block.draw_preview({
+        .x=s_text_buffer.bounds.x,
+        .y=s_text_buffer.bounds.y,
+        .height=preview_outline_size,
+        .width=preview_outline_size
+    });
+
+    s_text_buffer.width = MeasureText("Next", 18);
+    s_text_buffer.bounds.y += 5.0f;
+    s_text_buffer.bounds.x += (preview_outline_size / 2.0f) - (s_text_buffer.width / 2.0f);
+    DrawText("Next", 
+        s_text_buffer.bounds.x,
+        s_text_buffer.bounds.y,
+        18,
+        RED
+    );
 }

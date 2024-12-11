@@ -34,6 +34,7 @@ private:
 public:
     Block();
     void draw();
+    void draw_preview(const Rectangle &bounds);
     void clone(const Block &block);
     void move_by(const int &rows, const int &cols);
     void rotate();

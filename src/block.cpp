@@ -1,4 +1,5 @@
 #include "block.hpp"
+#include <algorithm>
 
 static constexpr const struct {
     const Grid::ColorId id;
@@ -80,6 +81,42 @@ void Block::draw() {
             (cell.row + m_row_offset) * Grid::s_cell_size + Grid::s_padding,  // ROW
             Grid::s_cell_size - Grid::s_cell_margin,
             Grid::s_cell_size - Grid::s_cell_margin,
+            Grid::s_cell_colors[proxy.id]
+        );
+    }
+}
+
+void Block::draw_preview(const Rectangle &bounds) {
+    const auto& proxy = s_blocks[m_type];
+    
+    // Find the block's boundaries
+    int min_row = 0, max_row = 0, min_col = 0, max_col = 0;
+    for (const auto& cell : proxy.data[m_rotation]) {
+        min_row = std::min(min_row, cell.row);
+        max_row = std::max(max_row, cell.row);
+        min_col = std::min(min_col, cell.col);
+        max_col = std::max(max_col, cell.col);
+    }
+    
+    // Calculate block dimensions
+    const float block_width = (max_col - min_col + 1) * Grid::s_cell_size;
+    const float block_height = (max_row - min_row + 1) * Grid::s_cell_size;
+    
+    // Calculate scaling to fit in bounds while maintaining aspect ratio
+    const float scale = std::min(bounds.width / block_width, bounds.height / block_height) * 0.6f;
+    
+    // Calculate centered position
+    const float cell_size = Grid::s_cell_size * scale;
+    const float start_x = bounds.x + (bounds.width - block_width * scale) / 2;
+    const float start_y = bounds.y + (bounds.height - block_height * scale) / 2;
+    
+    // Draw the block
+    for (const auto& cell : proxy.data[m_rotation]) {
+        DrawRectangle(
+            start_x + cell.col * cell_size,
+            start_y + cell.row * cell_size,
+            cell_size - Grid::s_cell_margin * scale,
+            cell_size - Grid::s_cell_margin * scale,
             Grid::s_cell_colors[proxy.id]
         );
     }
