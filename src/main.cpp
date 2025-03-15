@@ -7,7 +7,7 @@ constexpr const int WINDOW_HEIGHT = 640;
 constexpr const int FPS = 60;
 
 int main(void) {
-    InitWindow(WINDOW_WIDTH, WINDOW_HEIGHT, "TETRIS");
+    InitWindow(WINDOW_WIDTH, WINDOW_HEIGHT, "Tetris Clone");
     SetTargetFPS(FPS);
     InitAudioDevice();
 
