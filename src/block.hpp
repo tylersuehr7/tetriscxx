@@ -36,18 +36,24 @@ private:
     int m_col_offset{0};
 public:
     Block() = default;
+
+    // Drawing methods
     void draw() const;
     void draw_preview(const Rectangle &bounds) const;
+
+    // State modification methods
     Block& clone(const Block &block);
     Block& move_by(const int &rows, const int &cols);
     Block& rotate();
     Block& undo_rotate();
     Block& randomize();
-    const int& get_row_offset() const;
-    const int& get_col_offset() const;
-    const cell_t& get_cell(const int &position) const;
-    const BlockType& get_block_type() const;
-    const Grid::ColorId& get_color_id() const;
+
+    // Getters
+    [[nodiscard]] const int& get_row_offset() const;
+    [[nodiscard]] const int& get_col_offset() const;
+    [[nodiscard]] const cell_t& get_cell(const int &position) const;
+    [[nodiscard]] const BlockType& get_block_type() const;
+    [[nodiscard]] const Grid::ColorId& get_color_id() const;
 };
 
 }
