@@ -4,6 +4,8 @@
 #include <raylib.h>
 #include "grid.hpp"
 
+namespace tetris {
+
 class Block {
 public:
     typedef struct {
@@ -46,5 +48,7 @@ public:
     const BlockType& get_block_type() const;
     const Grid::ColorId& get_color_id() const;
 };
+
+}
 
 #endif//TETRIS_BLOCK_HPP

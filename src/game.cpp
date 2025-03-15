@@ -1,5 +1,7 @@
 #include "game.hpp"
 
+using namespace tetris;
+
 Game::Game(const Sounds &sounds):
     m_sounds(sounds),
     m_started(false),

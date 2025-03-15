@@ -3,6 +3,8 @@
 
 #include <raylib.h>
 
+namespace tetris {
+
 class Sounds {
 private:
     Sound m_clear_sound;
@@ -17,5 +19,7 @@ public:
     void continue_music() const;
     void stop_music() const;
 };
+
+}
 
 #endif//TETRIS_SOUNDS_HPP

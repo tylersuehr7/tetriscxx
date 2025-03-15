@@ -11,9 +11,8 @@ int main(void) {
     SetTargetFPS(FPS);
     InitAudioDevice();
 
-    Sounds sounds;
-
-    Game game(sounds);
+    tetris::Sounds sounds;
+    tetris::Game game(sounds);
 
     sounds.start_music();
     while (!WindowShouldClose()) {

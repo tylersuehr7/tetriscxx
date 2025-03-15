@@ -1,5 +1,7 @@
 #include "sounds.hpp"
 
+using namespace tetris;
+
 Sounds::Sounds():
     m_clear_sound(LoadSound("assets/clear.mp3")),
     m_rotate_sound(LoadSound("assets/rotate.mp3")),

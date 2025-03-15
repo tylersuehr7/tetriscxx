@@ -6,6 +6,8 @@
 #include "block.hpp"
 #include "sounds.hpp"
 
+namespace tetris {
+
 class Game {
 private:
     const Sounds& m_sounds;
@@ -35,5 +37,7 @@ private:
     void draw_not_started_hud(const Vector2 &bounds);
     void draw_game_over_hud(const Vector2 &bounds);
 };
+
+}
 
 #endif//TETRIS_GAME_HPP

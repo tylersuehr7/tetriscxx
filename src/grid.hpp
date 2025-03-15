@@ -3,6 +3,8 @@
 
 #include <raylib.h>
 
+namespace tetris {
+
 class Grid {
 public:
     typedef enum : unsigned char {
@@ -47,5 +49,7 @@ private:
     void clear_row(const unsigned int &row);
     void move_row_down(const unsigned int &row, const unsigned int &num_rows_cleared);
 };
+
+}
 
 #endif//TETRIS_GRID_HPP

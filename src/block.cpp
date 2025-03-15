@@ -1,6 +1,8 @@
 #include "block.hpp"
 #include <algorithm>
 
+using namespace tetris;
+
 static constexpr const struct {
     const Grid::ColorId id;
     const Block::cell_t data[Block::s_num_rotations][Block::s_num_cells];

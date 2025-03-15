@@ -1,5 +1,7 @@
 #include "grid.hpp"
 
+using namespace tetris;
+
 Grid::Grid(): m_cells() {
     reset_cells();
 }
