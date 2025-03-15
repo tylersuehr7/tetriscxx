@@ -6,8 +6,14 @@ include(FetchContent)
 FetchContent_Declare(raylib URL https://github.com/raysan5/raylib/archive/refs/tags/5.0.zip DOWNLOAD_EXTRACT_TIMESTAMP TRUE)
 FetchContent_MakeAvailable(raylib)
 
-# Find all .cpp files in the src directory and add them to the executable
-file(GLOB SOURCES "src/*.cpp")
+set(
+    SOURCES
+    src/main.cpp
+    src/sounds.cpp
+    src/grid.cpp
+    src/block.cpp
+    src/game.cpp
+)
 
 add_executable(
     ${PROJECT_NAME}
