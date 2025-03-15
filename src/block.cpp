@@ -72,9 +72,6 @@ static constexpr const struct {
     }, // ZBlock
 };
 
-Block::Block(): m_type(BLOCK_L), m_rotation(0), m_row_offset(0), m_col_offset(0) {
-}
-
 void Block::draw() const {
     const auto& proxy = s_blocks[m_type];
     for (const auto& cell : proxy.data[m_rotation]) {

@@ -29,12 +29,12 @@ public:
     static constexpr const int s_num_cells     = 4;
     static constexpr const int s_num_rotations = 4;
 private:
-    BlockType m_type;
-    BlockRotation m_rotation;
-    int m_row_offset;
-    int m_col_offset;
+    BlockType m_type{BLOCK_L};
+    BlockRotation m_rotation{0};
+    int m_row_offset{0};
+    int m_col_offset{0};
 public:
-    Block();
+    Block() = default;
     void draw() const;
     void draw_preview(const Rectangle &bounds) const;
     void clone(const Block &block);
