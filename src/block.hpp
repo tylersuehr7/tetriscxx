@@ -26,8 +26,9 @@ public:
 
     typedef unsigned char BlockRotation;
 public:
-    static constexpr const int s_num_cells     = 4;
-    static constexpr const int s_num_rotations = 4;
+    static constexpr const int s_num_cells       = 4;
+    static constexpr const int s_num_rotations   = 4;
+    static constexpr const float s_preview_scale = 0.6f;
 private:
     BlockType m_type{BLOCK_L};
     BlockRotation m_rotation{0};

@@ -102,7 +102,7 @@ void Block::draw_preview(const Rectangle &bounds) const {
     const float block_height = (max_row - min_row + 1) * Grid::s_cell_size;
     
     // Calculate scaling to fit in bounds while maintaining aspect ratio
-    const float scale = std::min(bounds.width / block_width, bounds.height / block_height) * 0.6f;
+    const float scale = std::min(bounds.width / block_width, bounds.height / block_height) * s_preview_scale;
     
     // Calculate centered position
     const float cell_size = Grid::s_cell_size * scale;
