@@ -19,7 +19,6 @@ private:
     Block m_next_block;
 public:
     Game(const Sounds &sounds);
-    void on_process_input();
     void on_update();
     void on_render();
 private:
@@ -31,6 +30,7 @@ private:
     bool is_block_touching_another_block_or_off_grid();
     void update_score(const int &rows_cleared, const int &down_points);
     void reset_game();
+    void on_process_input();
     void draw_score_time_and_preview_hud(const Vector2 &bounds);
     void draw_not_started_hud(const Vector2 &bounds);
     void draw_game_over_hud(const Vector2 &bounds);

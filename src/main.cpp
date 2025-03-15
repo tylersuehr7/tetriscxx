@@ -18,10 +18,8 @@ int main(void) {
     sounds.start_music();
     while (!WindowShouldClose()) {
         sounds.continue_music();
-        game.on_process_input();
         game.on_update();
         BeginDrawing();
-            ClearBackground(BLACK);
             game.on_render();
         EndDrawing();
     }

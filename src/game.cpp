@@ -14,6 +14,51 @@ Game::Game(const Sounds &sounds):
     m_next_block.randomize();
 }
 
+void Game::on_update() {
+    on_process_input();
+
+    if (!m_started || m_game_over) {
+        return;
+    }
+
+    const double current_time_in_secs = GetTime();
+
+    if (current_time_in_secs - m_last_update_in_secs < m_game_speed) {
+        return;
+    }
+
+    m_last_update_in_secs = current_time_in_secs;
+
+    move_block_down();
+}
+
+static struct {
+    float width;
+    Vector2 bounds;
+} s_text_buffer;
+
+void Game::on_render() {
+    ClearBackground(BLACK);
+    
+    const Vector2 bounds = { .x=(float) GetScreenWidth(), .y=(float) GetScreenHeight() };
+
+    if (!m_started) {
+        draw_not_started_hud(bounds);
+        return;
+    }
+
+    m_grid.draw();
+
+    if (m_game_over) {
+        draw_game_over_hud(bounds);
+        return;
+    }
+
+    m_block.draw();
+
+    draw_score_time_and_preview_hud(bounds);
+}
+
 void Game::on_process_input() {
     if (!m_started) {
         if (KEY_ENTER == GetKeyPressed()) {
@@ -42,47 +87,6 @@ void Game::on_process_input() {
         rotate_block();
         break;
     }
-}
-
-void Game::on_update() {
-    if (!m_started || m_game_over) {
-        return;
-    }
-
-    const double current_time_in_secs = GetTime();
-
-    if (current_time_in_secs - m_last_update_in_secs < m_game_speed) {
-        return;
-    }
-
-    m_last_update_in_secs = current_time_in_secs;
-
-    move_block_down();
-}
-
-static struct {
-    float width;
-    Vector2 bounds;
-} s_text_buffer;
-
-void Game::on_render() {
-    const Vector2 bounds = { .x=(float) GetScreenWidth(), .y=(float) GetScreenHeight() };
-
-    if (!m_started) {
-        draw_not_started_hud(bounds);
-        return;
-    }
-
-    m_grid.draw();
-
-    if (m_game_over) {
-        draw_game_over_hud(bounds);
-        return;
-    }
-
-    m_block.draw();
-
-    draw_score_time_and_preview_hud(bounds);
 }
 
 void Game::finalize_block() {
