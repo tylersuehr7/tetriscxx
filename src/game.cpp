@@ -54,19 +54,19 @@ void Game::on_render() {
 }
 
 void Game::on_process_input() {
-    if (!m_started) {
-        if (KEY_ENTER == GetKeyPressed()) {
+    auto pressed_key = GetKeyPressed();
+
+    if (pressed_key == KEY_ENTER) {
+        if (!m_started) {
             m_started = true;
-        }
-        return;
-    } else if (m_game_over) {
-        if (KEY_ENTER == GetKeyPressed()) {
+            return;
+        } else if (m_game_over) {
             reset_game();
+            return;
         }
-        return;
     }
 
-    switch (GetKeyPressed()) {
+    switch (pressed_key) {
     case KEY_LEFT:
         move_block_left();
         break;
