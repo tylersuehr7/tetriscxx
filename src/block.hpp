@@ -35,8 +35,8 @@ private:
     int m_col_offset;
 public:
     Block();
-    void draw();
-    void draw_preview(const Rectangle &bounds);
+    void draw() const;
+    void draw_preview(const Rectangle &bounds) const;
     void clone(const Block &block);
     void move_by(const int &rows, const int &cols);
     void rotate();

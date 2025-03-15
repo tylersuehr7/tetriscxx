@@ -41,11 +41,11 @@ public:
     void draw();
     void reset_cells();
     void set_cell_color(const unsigned int &row, const unsigned int &col, const ColorId &id);
-    const bool is_cell_empty(const unsigned int &row, const unsigned int &col);
-    const bool is_off_grid(const int &adjusted_row, const int &adjusted_col);
+    const bool is_cell_empty(const unsigned int &row, const unsigned int &col) const;
+    const bool is_off_grid(const int &adjusted_row, const int &adjusted_col) const;
     int clear_full_rows();
 private:
-    bool is_row_full(const unsigned int &row);
+    bool is_row_full(const unsigned int &row) const;
     void clear_row(const unsigned int &row);
     void move_row_down(const unsigned int &row, const unsigned int &num_rows_cleared);
 };

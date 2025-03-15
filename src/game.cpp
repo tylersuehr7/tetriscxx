@@ -149,7 +149,7 @@ void Game::move_block_down() {
     }
 }
 
-bool Game::is_block_touching_another_block_or_off_grid() {
+bool Game::is_block_touching_another_block_or_off_grid() const {
     int position, trans_row, trans_col;
     for (position = 0; position < Block::s_num_cells; position++) {
         const auto& cell = m_block.get_cell(position);
@@ -192,7 +192,7 @@ void Game::reset_game() {
     m_next_block.randomize();
 }
 
-void Game::draw_score_time_and_preview_hud(const Vector2 &bounds) {
+void Game::draw_score_time_and_preview_hud(const Vector2 &bounds) const {
     // Draw text to the right of the Tetris Grid
     s_text_buffer.bounds.x = (Grid::s_cell_size * Grid::s_num_cols) + Grid::s_padding + 10.0f;
     s_text_buffer.bounds.y = Grid::s_padding;
@@ -235,7 +235,7 @@ void Game::draw_score_time_and_preview_hud(const Vector2 &bounds) {
     );
 }
 
-void Game::draw_not_started_hud(const Vector2 &bounds) {
+void Game::draw_not_started_hud(const Vector2 &bounds) const {
     s_text_buffer.width = MeasureText("Welcome!", 20);
     s_text_buffer.bounds.x = (bounds.x / 2.0f) - (s_text_buffer.width / 2.0f);
     s_text_buffer.bounds.y = (bounds.y / 2.0f) - 10.0f - 20.0f - 30.0f;
@@ -257,7 +257,7 @@ void Game::draw_not_started_hud(const Vector2 &bounds) {
     DrawText("Powered by Suehr Gaming LLC", s_text_buffer.bounds.x, s_text_buffer.bounds.y, 10, WHITE);
 }
 
-void Game::draw_game_over_hud(const Vector2 &bounds) {
+void Game::draw_game_over_hud(const Vector2 &bounds) const {
     s_text_buffer.width = MeasureText("GAME OVER", 30);
     s_text_buffer.bounds.x = (bounds.x / 2.0f) - (s_text_buffer.width / 2.0f);
     s_text_buffer.bounds.y = 20.0f;

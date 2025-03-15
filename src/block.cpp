@@ -75,7 +75,7 @@ static constexpr const struct {
 Block::Block(): m_type(BLOCK_L), m_rotation(0), m_row_offset(0), m_col_offset(0) {
 }
 
-void Block::draw() {
+void Block::draw() const {
     const auto& proxy = s_blocks[m_type];
     for (const auto& cell : proxy.data[m_rotation]) {
         DrawRectangle(
@@ -88,7 +88,7 @@ void Block::draw() {
     }
 }
 
-void Block::draw_preview(const Rectangle &bounds) {
+void Block::draw_preview(const Rectangle &bounds) const {
     const auto& proxy = s_blocks[m_type];
     
     // Find the block's boundaries

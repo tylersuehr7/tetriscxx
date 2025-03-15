@@ -29,13 +29,13 @@ private:
     void move_block_left();
     void move_block_right();
     void move_block_down();
-    bool is_block_touching_another_block_or_off_grid();
+    bool is_block_touching_another_block_or_off_grid() const;
     void update_score(const int &rows_cleared, const int &down_points);
     void reset_game();
     void on_process_input();
-    void draw_score_time_and_preview_hud(const Vector2 &bounds);
-    void draw_not_started_hud(const Vector2 &bounds);
-    void draw_game_over_hud(const Vector2 &bounds);
+    void draw_score_time_and_preview_hud(const Vector2 &bounds) const;
+    void draw_not_started_hud(const Vector2 &bounds) const;
+    void draw_game_over_hud(const Vector2 &bounds) const;
 };
 
 }
