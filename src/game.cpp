@@ -1,4 +1,5 @@
 #include "game.hpp"
+#include <array>
 
 using namespace tetris;
 
@@ -157,22 +158,17 @@ bool Game::is_block_touching_another_block_or_off_grid() const {
 }
 
 void Game::update_score(const int &rows_cleared, const int &down_points) {
-    switch (rows_cleared) {
-    case 1:
-        m_score += 100;
-        break;
-    case 2:
-        m_score += 300;
-        break;
-    case 3:
-        m_score += 500;
-        break;
-    case 4:
-        m_score += 1000;
-        // TODO: play tetris sound
-        break;
-    }
+    static const std::array<int, 5> rows_cleared_points = {0, 100, 300, 500, 1000};
+
+    // Clamp to range between 0 and 4 (4 is max score points)
+    const int clamped_rows_cleared = std::max(std::min(rows_cleared, 4), 0);
+    
+    m_score += rows_cleared_points[clamped_rows_cleared];
     m_score += down_points;
+
+    if (clamped_rows_cleared == 4) {
+        // TODO: play tetris sound
+    }
 }
 
 void Game::reset_game() {
