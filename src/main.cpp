@@ -4,16 +4,16 @@
 
 constexpr const int WINDOW_WIDTH = 500;
 constexpr const int WINDOW_HEIGHT = 640;
+constexpr const int FPS = 60;
 
 int main(void) {
     InitWindow(WINDOW_WIDTH, WINDOW_HEIGHT, "TETRIS");
+    SetTargetFPS(FPS);
     InitAudioDevice();
 
     Sounds sounds;
 
     Game game(sounds);
-
-    SetTargetFPS(60);
 
     sounds.start_music();
     while (!WindowShouldClose()) {
