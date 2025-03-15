@@ -121,24 +121,28 @@ void Block::draw_preview(const Rectangle &bounds) const {
     }
 }
 
-void Block::clone(const Block &block) {
+Block& Block::clone(const Block &block) {
     m_type = block.m_type;
     m_rotation = block.m_rotation;
     m_row_offset = block.m_row_offset;
     m_col_offset = block.m_col_offset;
+    return *this;
 }
 
-void Block::move_by(const int &rows, const int &cols) {
+Block& Block::move_by(const int &rows, const int &cols) {
     m_row_offset += rows;
     m_col_offset += cols;
+    return *this;
 }
 
-void Block::rotate() {
+Block& Block::rotate() {
     m_rotation = (m_rotation + 1) % 4;
+    return *this;
 }
 
-void Block::undo_rotate() {
+Block& Block::undo_rotate() {
     m_rotation = (m_rotation - 1 + 4) % 4;
+    return *this;
 }
 
 Block& Block::randomize() {

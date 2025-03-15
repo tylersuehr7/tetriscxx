@@ -38,10 +38,10 @@ public:
     Block() = default;
     void draw() const;
     void draw_preview(const Rectangle &bounds) const;
-    void clone(const Block &block);
-    void move_by(const int &rows, const int &cols);
-    void rotate();
-    void undo_rotate();
+    Block& clone(const Block &block);
+    Block& move_by(const int &rows, const int &cols);
+    Block& rotate();
+    Block& undo_rotate();
     Block& randomize();
     const int& get_row_offset() const;
     const int& get_col_offset() const;
