@@ -11,14 +11,14 @@ namespace tetris {
 class Game {
 private:
     const Sounds& m_sounds;
-    bool m_started;
-    bool m_game_over;
-    float m_game_speed;
-    double m_last_update_in_secs;
-    int m_score;
-    Grid m_grid;
-    Block m_block;
-    Block m_next_block;
+    bool m_started{false};
+    bool m_game_over{false};
+    float m_game_speed{0.4f};
+    double m_last_update_in_secs{0.0};
+    int m_score{0};
+    Grid m_grid{};
+    Block m_block{};
+    Block m_next_block{};
 public:
     Game(const Sounds &sounds);
     void on_update();

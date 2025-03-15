@@ -2,16 +2,7 @@
 
 using namespace tetris;
 
-Game::Game(const Sounds &sounds):
-    m_sounds(sounds),
-    m_started(false),
-    m_game_over(false),
-    m_game_speed(0.4f),
-    m_last_update_in_secs(0.0),
-    m_score(0), 
-    m_grid(Grid()), 
-    m_block(Block()),
-    m_next_block(Block()) {
+Game::Game(const Sounds &sounds): m_sounds(sounds) {
     m_block.randomize();
     m_next_block.randomize();
 }
