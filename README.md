@@ -9,4 +9,4 @@ A re-implementation of the Tetris video game in the C++ 20 programming language.
 - `make`
 - `git`
 
-> Copyright © 2024 Tyler R. Suehr
+> Copyright © 2025 Tyler R. Suehr
