@@ -41,7 +41,7 @@ public:
     void move_by(const int &rows, const int &cols);
     void rotate();
     void undo_rotate();
-    void randomize();
+    Block& randomize();
     const int& get_row_offset() const;
     const int& get_col_offset() const;
     const cell_t& get_cell(const int &position) const;

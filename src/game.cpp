@@ -2,9 +2,10 @@
 
 using namespace tetris;
 
-Game::Game(const Sounds &sounds): m_sounds(sounds) {
-    m_block.randomize();
-    m_next_block.randomize();
+Game::Game(const Sounds &sounds): 
+    m_sounds(sounds),
+    m_block(Block().randomize()),
+    m_next_block(Block().randomize()) {
 }
 
 void Game::on_update() {

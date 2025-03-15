@@ -17,8 +17,8 @@ private:
     double m_last_update_in_secs{0.0};
     int m_score{0};
     Grid m_grid{};
-    Block m_block{};
-    Block m_next_block{};
+    Block m_block;
+    Block m_next_block;
 public:
     Game(const Sounds &sounds);
     void on_update();

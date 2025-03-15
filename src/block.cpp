@@ -144,12 +144,13 @@ void Block::undo_rotate() {
     m_rotation = (m_rotation - 1 + 4) % 4;
 }
 
-void Block::randomize() {
+Block& Block::randomize() {
     const BlockType new_type = (BlockType) GetRandomValue(0, BLOCK_MAX - 1);
     m_type = new_type;
     m_row_offset = 0;
     m_col_offset = (Grid::s_num_cols - 1) >> 1;
     m_rotation = 0;
+    return *this;
 }
 
 const int& Block::get_row_offset() const {
