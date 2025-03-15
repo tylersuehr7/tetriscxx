@@ -1,7 +1,6 @@
 #include "game.hpp"
 
-Game::Game(const Vector2 &size, const Sounds &sounds): 
-    m_size(size),
+Game::Game(const Sounds &sounds):
     m_sounds(sounds),
     m_started(false),
     m_game_over(false),
@@ -67,46 +66,23 @@ static struct {
 } s_text_buffer;
 
 void Game::on_render() {
+    const Vector2 bounds = { .x=(float) GetScreenWidth(), .y=(float) GetScreenHeight() };
+
     if (!m_started) {
-        s_text_buffer.width = MeasureText("Welcome!", 20);
-        s_text_buffer.bounds.x = (m_size.x / 2.0f) - (s_text_buffer.width / 2.0f);
-        s_text_buffer.bounds.y = (m_size.y / 2.0f) - 10.0f - 20.0f - 30.0f;
-        DrawText("Welcome!", s_text_buffer.bounds.x, s_text_buffer.bounds.y, 20, WHITE);
-
-        s_text_buffer.width = MeasureText("Tetris Clone", 30);
-        s_text_buffer.bounds.x = (m_size.x / 2.0f) - (s_text_buffer.width / 2.0f);
-        s_text_buffer.bounds.y += 30.0f;
-        DrawText("Tetris Clone", s_text_buffer.bounds.x, s_text_buffer.bounds.y, 30, WHITE);
-
-        s_text_buffer.width = MeasureText("Press 'enter' to play", 12);
-        s_text_buffer.bounds.x = (m_size.x / 2.0f) - (s_text_buffer.width / 2.0f);
-        s_text_buffer.bounds.y += 60.0f;
-        DrawText("Press 'enter' to play", s_text_buffer.bounds.x, s_text_buffer.bounds.y, 12, WHITE);
-
-        s_text_buffer.width = MeasureText("Powered by Suehr Gaming LLC", 10);
-        s_text_buffer.bounds.x = (m_size.x / 2.0f) - (s_text_buffer.width / 2.0f);
-        s_text_buffer.bounds.y = m_size.y - 30.0f;
-        DrawText("Powered by Suehr Gaming LLC", s_text_buffer.bounds.x, s_text_buffer.bounds.y, 10, WHITE);
-
+        draw_not_started_hud(bounds);
         return;
     }
 
     m_grid.draw();
-    m_block.draw();
-
-    draw_hud();
 
     if (m_game_over) {
-        s_text_buffer.width = MeasureText("GAME OVER", 30);
-        s_text_buffer.bounds.x = (m_size.x / 2.0f) - (s_text_buffer.width / 2.0f);
-        s_text_buffer.bounds.y = 20.0f;
-        DrawText("GAME OVER", s_text_buffer.bounds.x, s_text_buffer.bounds.y, 30, RED);
-
-        s_text_buffer.width = MeasureText("Press 'enter' to play again", 12);
-        s_text_buffer.bounds.x = (m_size.x / 2.0f) - (s_text_buffer.width / 2.0f);
-        s_text_buffer.bounds.y += 40.0f;
-        DrawText("Press 'enter' to play again", s_text_buffer.bounds.x, s_text_buffer.bounds.y, 12, RED);
+        draw_game_over_hud(bounds);
+        return;
     }
+
+    m_block.draw();
+
+    draw_score_time_and_preview_hud(bounds);
 }
 
 void Game::finalize_block() {
@@ -210,7 +186,7 @@ void Game::reset_game() {
     m_next_block.randomize();
 }
 
-void Game::draw_hud() {
+void Game::draw_score_time_and_preview_hud(const Vector2 &bounds) {
     // Draw text to the right of the Tetris Grid
     s_text_buffer.bounds.x = (Grid::s_cell_size * Grid::s_num_cols) + Grid::s_padding + 10.0f;
     s_text_buffer.bounds.y = Grid::s_padding;
@@ -226,7 +202,7 @@ void Game::draw_hud() {
     DrawText(TextFormat("%.2f", GetTime()), s_text_buffer.bounds.x, s_text_buffer.bounds.y, 16, WHITE);
 
     s_text_buffer.bounds.y += 30.0f;
-    const float preview_outline_size = m_size.x - s_text_buffer.bounds.x - 10.0f;
+    const float preview_outline_size = bounds.x - s_text_buffer.bounds.x - 10.0f;
     DrawRectangleLines(
         s_text_buffer.bounds.x,
         s_text_buffer.bounds.y,
@@ -251,4 +227,38 @@ void Game::draw_hud() {
         18,
         RED
     );
+}
+
+void Game::draw_not_started_hud(const Vector2 &bounds) {
+    s_text_buffer.width = MeasureText("Welcome!", 20);
+    s_text_buffer.bounds.x = (bounds.x / 2.0f) - (s_text_buffer.width / 2.0f);
+    s_text_buffer.bounds.y = (bounds.y / 2.0f) - 10.0f - 20.0f - 30.0f;
+    DrawText("Welcome!", s_text_buffer.bounds.x, s_text_buffer.bounds.y, 20, WHITE);
+
+    s_text_buffer.width = MeasureText("Tetris Clone", 30);
+    s_text_buffer.bounds.x = (bounds.x / 2.0f) - (s_text_buffer.width / 2.0f);
+    s_text_buffer.bounds.y += 30.0f;
+    DrawText("Tetris Clone", s_text_buffer.bounds.x, s_text_buffer.bounds.y, 30, WHITE);
+
+    s_text_buffer.width = MeasureText("Press 'enter' to play", 12 );
+    s_text_buffer.bounds.x = (bounds.x / 2.0f) - (s_text_buffer.width / 2.0f);
+    s_text_buffer.bounds.y += 60.0f;
+    DrawText("Press 'enter' to play", s_text_buffer.bounds.x, s_text_buffer.bounds.y, 12, WHITE);
+
+    s_text_buffer.width = MeasureText("Powered by Suehr Gaming LLC", 10);
+    s_text_buffer.bounds.x = (bounds.x / 2.0f) - (s_text_buffer.width / 2.0f);
+    s_text_buffer.bounds.y = bounds.y - 30.0f;
+    DrawText("Powered by Suehr Gaming LLC", s_text_buffer.bounds.x, s_text_buffer.bounds.y, 10, WHITE);
+}
+
+void Game::draw_game_over_hud(const Vector2 &bounds) {
+    s_text_buffer.width = MeasureText("GAME OVER", 30);
+    s_text_buffer.bounds.x = (bounds.x / 2.0f) - (s_text_buffer.width / 2.0f);
+    s_text_buffer.bounds.y = 20.0f;
+    DrawText("GAME OVER", s_text_buffer.bounds.x, s_text_buffer.bounds.y, 30, RED);
+
+    s_text_buffer.width = MeasureText("Press 'enter' to play again", 12);
+    s_text_buffer.bounds.x = (bounds.x / 2.0f) - (s_text_buffer.width / 2.0f);
+    s_text_buffer.bounds.y += 40.0f;
+    DrawText("Press 'enter' to play again", s_text_buffer.bounds.x, s_text_buffer.bounds.y, 12, RED);
 }

@@ -11,7 +11,7 @@ int main(void) {
 
     Sounds sounds;
 
-    Game game({(float) WINDOW_WIDTH, (float) WINDOW_HEIGHT}, sounds);
+    Game game(sounds);
 
     SetTargetFPS(60);
 

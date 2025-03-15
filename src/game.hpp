@@ -8,7 +8,6 @@
 
 class Game {
 private:
-    const Vector2 m_size;
     const Sounds& m_sounds;
     bool m_started;
     bool m_game_over;
@@ -19,7 +18,7 @@ private:
     Block m_block;
     Block m_next_block;
 public:
-    Game(const Vector2 &size, const Sounds &sounds);
+    Game(const Sounds &sounds);
     void on_process_input();
     void on_update();
     void on_render();
@@ -32,7 +31,9 @@ private:
     bool is_block_touching_another_block_or_off_grid();
     void update_score(const int &rows_cleared, const int &down_points);
     void reset_game();
-    void draw_hud();
+    void draw_score_time_and_preview_hud(const Vector2 &bounds);
+    void draw_not_started_hud(const Vector2 &bounds);
+    void draw_game_over_hud(const Vector2 &bounds);
 };
 
 #endif//TETRIS_GAME_HPP
