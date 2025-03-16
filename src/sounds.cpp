@@ -15,6 +15,37 @@ Sounds::~Sounds() {
     UnloadMusicStream(m_music);
 }
 
+Sounds::Sounds(Sounds&& other) noexcept :
+    m_clear_sound(other.m_clear_sound),
+    m_rotate_sound(other.m_rotate_sound),
+    m_music(other.m_music) {
+    // Zero out the other object's members to prevent double deletion
+    other.m_clear_sound = {};
+    other.m_rotate_sound = {};
+    other.m_music = {};
+}
+
+Sounds& Sounds::operator=(Sounds&& other) noexcept {
+    if (this != &other) {
+        // Clean up existing resources
+        stop_music();
+        UnloadSound(m_clear_sound);
+        UnloadSound(m_rotate_sound);
+        UnloadMusicStream(m_music);
+        
+        // Move resources from other
+        m_clear_sound = other.m_clear_sound;
+        m_rotate_sound = other.m_rotate_sound;
+        m_music = other.m_music;
+        
+        // Zero out the other object's members
+        other.m_clear_sound = {};
+        other.m_rotate_sound = {};
+        other.m_music = {};
+    }
+    return *this;
+}
+
 void Sounds::play_clear() const {
     PlaySound(m_clear_sound);
 }

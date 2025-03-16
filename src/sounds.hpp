@@ -13,6 +13,15 @@ private:
 public:
     Sounds();
     ~Sounds();
+
+    // Sound resources should never be copied
+    Sounds(const Sounds&) = delete;
+    Sounds& operator=(const Sounds&) = delete;
+
+    // Move semantics
+    Sounds(Sounds&& other) noexcept;
+    Sounds& operator=(Sounds&& other) noexcept;
+    
     void play_clear() const;
     void play_rotate() const;
     void start_music() const;
