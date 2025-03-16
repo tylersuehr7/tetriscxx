@@ -38,12 +38,18 @@ private:
     ColorId m_cells[s_num_rows][s_num_cols]{};
 public:
     Grid() = default;
+
+    // Drawing methods
     void draw();
+
+    // State modification methods
     void reset_cells();
     void set_cell_color(const unsigned int &row, const unsigned int &col, const ColorId &id);
-    const bool is_cell_empty(const unsigned int &row, const unsigned int &col) const;
-    const bool is_off_grid(const int &adjusted_row, const int &adjusted_col) const;
-    int clear_full_rows();
+    
+    // Getters
+    [[nodiscard]] const bool is_cell_empty(const unsigned int &row, const unsigned int &col) const;
+    [[nodiscard]] const bool is_off_grid(const int &adjusted_row, const int &adjusted_col) const;
+    [[nodiscard]] int clear_full_rows();
 private:
     bool is_row_full(const unsigned int &row) const;
     void clear_row(const unsigned int &row);
