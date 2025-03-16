@@ -40,7 +40,7 @@ public:
     Grid() = default;
 
     // Drawing methods
-    void draw();
+    void draw() const;
 
     // State modification methods
     void reset_cells();

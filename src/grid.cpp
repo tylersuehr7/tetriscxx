@@ -2,7 +2,7 @@
 
 using namespace tetris;
 
-void Grid::draw() {
+void Grid::draw() const {
     for (auto row = 0; row < s_num_rows; row++) {
         for (auto col = 0; col < s_num_cols; col++) {
             DrawRectangle(
