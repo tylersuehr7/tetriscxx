@@ -35,9 +35,9 @@ public:
         MAROON,     // COLOR_ID_RED
     };
 private:
-    ColorId m_cells[s_num_rows][s_num_cols];
+    ColorId m_cells[s_num_rows][s_num_cols]{};
 public:
-    Grid();
+    Grid() = default;
     void draw();
     void reset_cells();
     void set_cell_color(const unsigned int &row, const unsigned int &col, const ColorId &id);

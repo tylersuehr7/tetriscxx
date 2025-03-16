@@ -2,10 +2,6 @@
 
 using namespace tetris;
 
-Grid::Grid(): m_cells() {
-    reset_cells();
-}
-
 void Grid::draw() {
     for (auto row = 0; row < s_num_rows; row++) {
         for (auto col = 0; col < s_num_cols; col++) {
