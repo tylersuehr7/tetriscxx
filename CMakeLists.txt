@@ -3,7 +3,7 @@ project(tetris)
 set(CMAKE_CXX_STANDARD 20)
 
 include(FetchContent)
-FetchContent_Declare(raylib URL https://github.com/raysan5/raylib/archive/refs/tags/5.0.zip DOWNLOAD_EXTRACT_TIMESTAMP TRUE)
+FetchContent_Declare(raylib URL https://github.com/raysan5/raylib/archive/refs/tags/5.5.zip DOWNLOAD_EXTRACT_TIMESTAMP TRUE)
 FetchContent_MakeAvailable(raylib)
 
 set(
